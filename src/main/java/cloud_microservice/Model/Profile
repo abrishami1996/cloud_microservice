@@ -25,6 +25,8 @@ public class Profile implements Serializable {
     private long PostalCode;
     @OneToOne(mappedBy="profile")
     private Wallet wallet;
+    @OneToOne(mappedBy="profile")
+    private Transaction transaction;
 
     public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode) {
         Email = email;
