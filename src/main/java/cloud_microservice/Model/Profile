@@ -1,0 +1,96 @@
+package cloud_microservice.Model;
+import javax.persistence.*;
+import java.io.Serializable;
+
+
+@Entity
+@Table(name="Profile")
+@IdClass(ProfileCompositeKey.class)
+public class Profile implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Id
+    @Column(name = "Email")
+    private String Email;
+    @Column(name = "Name")
+    private String Name;
+    @Column(name = "PhoneNo")
+    private long PhoneNo;
+    @Column(name = "NationalCode")
+    private long NationalCode;
+    @Column(name = "Address")
+    private String Address;
+    @Column(name = "PostalCode")
+    private long PostalCode;
+    @OneToOne(mappedBy="profile")
+    private Wallet wallet;
+
+    public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode) {
+        Email = email;
+        Name = name;
+        PhoneNo = phoneNo;
+        NationalCode = nationalCode;
+        Address = address;
+        PostalCode = postalCode;
+    }
+
+    public Profile() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public long getPhoneNo() {
+        return PhoneNo;
+    }
+
+    public void setPhoneNo(long phoneNo) {
+        PhoneNo = phoneNo;
+    }
+
+    public long getNationalCode() {
+        return NationalCode;
+    }
+
+    public void setNationalCode(long nationalCode) {
+        NationalCode = nationalCode;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
+    }
+
+    public long getPostalCode() {
+        return PostalCode;
+    }
+
+    public void setPostalCode(long postalCode) {
+        PostalCode = postalCode;
+    }
+}
