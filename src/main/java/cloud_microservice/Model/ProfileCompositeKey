@@ -1,9 +1,0 @@
-package cloud_microservice.Model;
-
-import javax.persistence.*;
-import java.io.Serializable;
-
-public class ProfileCompositeKey implements Serializable {
-    private int id;
-    private String Email;
-}

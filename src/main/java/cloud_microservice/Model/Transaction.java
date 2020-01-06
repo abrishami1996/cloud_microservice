@@ -1,43 +1,40 @@
 package cloud_microservice.Model;
+
 import javax.persistence.*;
 
-
-
-@Entity
-@Table(name="Transaction")
-@IdClass(TransactionCompositeKey.class)
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Id
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Profile_ID", referencedColumnName = "id")
-    private Profile profile;
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Profile p;
+
     @Id
-    @Column(name = "createAt")
-    private int createAt;
-    @Column(name = "modifiedAt")
-    private int modifiedAt;
+    @Column(name = "CreatedAt")
+    private int CreatedAt;
+    @Column(name = "ModifiedAt")
+    private int ModifiedAt;
     @Id
     @Column(name = "amount")
     private int amount;
     @Id
     @Column(name = "orderID")
     private int orderID;
-    @Column(name = "statusCode")
-    private int statusCode;
+    @Column(name = "statuscode")
+    private int statuscode;
     @Column(name = "refID")
     private int refID;
 
-    public Transaction(Profile profile, int createAt, int modifiedAt, int amount, int orderID, int statusCode, int refID) {
-        this.profile = profile;
-        this.createAt = createAt;
-        this.modifiedAt = modifiedAt;
+    public Transaction(int createdAt, int modifiedAt, int amount, int orderID, int statuscode, int refID, Profile profile) {
+        CreatedAt = createdAt;
+        ModifiedAt = modifiedAt;
         this.amount = amount;
         this.orderID = orderID;
-        this.statusCode = statusCode;
+        this.statuscode = statuscode;
         this.refID = refID;
+        this.p = profile;
     }
 
     public Transaction() {
@@ -51,28 +48,20 @@ public class Transaction {
         this.id = id;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public int getCreatedAt() {
+        return CreatedAt;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-    }
-
-    public int getCreateAt() {
-        return createAt;
-    }
-
-    public void setCreateAt(int createAt) {
-        this.createAt = createAt;
+    public void setCreatedAt(int createdAt) {
+        CreatedAt = createdAt;
     }
 
     public int getModifiedAt() {
-        return modifiedAt;
+        return ModifiedAt;
     }
 
     public void setModifiedAt(int modifiedAt) {
-        this.modifiedAt = modifiedAt;
+        ModifiedAt = modifiedAt;
     }
 
     public int getAmount() {
@@ -91,12 +80,12 @@ public class Transaction {
         this.orderID = orderID;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public int getStatuscode() {
+        return statuscode;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public void setStatuscode(int statuscode) {
+        this.statuscode = statuscode;
     }
 
     public int getRefID() {
@@ -105,5 +94,13 @@ public class Transaction {
 
     public void setRefID(int refID) {
         this.refID = refID;
+    }
+
+    public Profile getProfile() {
+        return p;
+    }
+
+    public void setProfile(Profile profile) {
+        this.p = profile;
     }
 }

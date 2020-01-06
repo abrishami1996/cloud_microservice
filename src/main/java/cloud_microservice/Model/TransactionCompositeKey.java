@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class TransactionCompositeKey implements Serializable {
     private int id;
-    private Profile profile;
+    private Profile p;
     private int createAt;
     private int amount;
     private int orderID;

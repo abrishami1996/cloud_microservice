@@ -1,6 +1,4 @@
 package cloud_microservice.Model;
-import cloud_microservice.Model.Profile;
-import cloud_microservice.Model.WalletCompositeKey;
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -14,10 +12,11 @@ public class Wallet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Id
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="Profile_ID", referencedColumnName = "id")
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private Profile profile;
+
     @Id
     @Column(name = "value")
     private int value;
