@@ -6,6 +6,7 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Id
     @OneToOne
     @PrimaryKeyJoinColumn
