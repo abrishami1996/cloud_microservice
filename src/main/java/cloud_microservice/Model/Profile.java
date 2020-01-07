@@ -39,6 +39,15 @@ public class Profile implements Serializable{
         this.transaction = transaction;
     }
 
+    public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode) {
+        Email = email;
+        Name = name;
+        PhoneNo = phoneNo;
+        NationalCode = nationalCode;
+        Address = address;
+        PostalCode = postalCode;
+    }
+
     public Profile() {
     }
 
