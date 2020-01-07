@@ -13,8 +13,8 @@ import java.util.List;
 @RestController
 public class AccountmanagementController {
 
-    @RequestMapping(value = "/HeartBeat",method = RequestMethod.GET)
-    public String addCourse() {
+    @RequestMapping(value = "/account/HeartBeat",method = RequestMethod.GET)
+    public String HeartBeat() {
 
         return "Account Management is up and running!";
 
