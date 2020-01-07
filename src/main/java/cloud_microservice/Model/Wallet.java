@@ -18,7 +18,7 @@ public class Wallet implements Serializable {
     private int value;
 
     public Wallet(Profile profile, int value) {
-    //    this.profile = profile;
+        this.profile = profile;
         this.value = value;
     }
 
@@ -33,13 +33,13 @@ public class Wallet implements Serializable {
         this.id = id;
     }
 
-  //  public Profile getProfile() {
-  //      return profile;
-   // }
+    public Profile getProfile() {
+        return profile;
+    }
 
-  //  public void setProfile(Profile profile) {
-  //      this.profile = profile;
-  //  }
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 
     public int getValue() {
         return value;

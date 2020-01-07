@@ -10,7 +10,6 @@ public class Transaction implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Id
     //@OneToOne
     //@PrimaryKeyJoinColumn
     @OneToOne(cascade = CascadeType.ALL)
