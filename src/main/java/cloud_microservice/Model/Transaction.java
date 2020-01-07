@@ -1,22 +1,29 @@
 package cloud_microservice.Model;
-
 import javax.persistence.*;
+import java.io.Serializable;
 
-public class Transaction {
+
+@Entity
+@Table(name="Transaction")
+public class Transaction implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Id
-    @OneToOne
-    @PrimaryKeyJoinColumn
-    private Profile p;
+    //@OneToOne
+    //@PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "Profile_ID")
+    private Profile profile;
 
     @Id
     @Column(name = "CreatedAt")
     private int CreatedAt;
+
     @Column(name = "ModifiedAt")
     private int ModifiedAt;
+
     @Id
     @Column(name = "amount")
     private int amount;
@@ -35,7 +42,7 @@ public class Transaction {
         this.orderID = orderID;
         this.statuscode = statuscode;
         this.refID = refID;
-        this.p = profile;
+        this.profile = profile;
     }
 
     public Transaction() {
@@ -98,10 +105,10 @@ public class Transaction {
     }
 
     public Profile getProfile() {
-        return p;
+        return profile;
     }
 
     public void setProfile(Profile profile) {
-        this.p = profile;
+        this.profile = profile;
     }
 }
