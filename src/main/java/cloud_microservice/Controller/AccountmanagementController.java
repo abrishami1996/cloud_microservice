@@ -51,4 +51,21 @@ public class AccountmanagementController {
         }
 
     }
+
+    private Boolean Validator (String jwttoken){
+        final String uri = ".../authentiq/v1/validate/token";
+        System.out.println(jwttoken);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(jwttoken);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+        entity = restTemplate.exchange(uri, HttpMethod.GET,entity,String.class);
+        HttpStatus statusCode = ((ResponseEntity<String>) entity).getStatusCode();
+        if (statusCode.value() == 200)
+        {
+            return true;
+        }
+        return false;
+
+    }
 }
