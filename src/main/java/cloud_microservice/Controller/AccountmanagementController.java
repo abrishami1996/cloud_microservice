@@ -3,13 +3,11 @@ import cloud_microservice.Model.Profile;
 import cloud_microservice.Model.ProfileRequest;
 import cloud_microservice.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -51,26 +49,27 @@ public class AccountmanagementController {
 
     }
 
-    private Boolean Validator(String jwttoken) {
+    private String Validator(String jwttoken) {
         final String uri = ".../authentiq/v1/validate/token";
         System.out.println(jwttoken);
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(jwttoken);
         RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
-        entity = restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
-        HttpStatus statusCode = ((ResponseEntity<String>) entity).getStatusCode();
+        HttpEntity<ValidateMapper> entity = null;
+        entity = restTemplate.exchange(uri, HttpMethod.GET, entity, ValidateMapper.class);
+        HttpStatus statusCode = ((ResponseEntity<ValidateMapper>) entity).getStatusCode();
         if (statusCode.value() == 200) {
-            return true;
+            return entity.getBody().getEmail();
         }
-        return false;
+        return "fail";
 
     }
 
     @RequestMapping(value = "/account/UpdateProfile",method = RequestMethod.POST)
     public String UpdateProfile(String jwttoken, @RequestBody ProfileRequest req){
-        if (Validator(jwttoken)) {
-            Profile p = profilerepository.findByEmail(req.getEmail());
+        String c = Validator(jwttoken);
+        if (c != "fail") {
+            Profile p = profilerepository.findByEmail(c);
             if ( p!= null) {
                 p.setName(req.getName());
                 p.setAddress(req.getAddress());
@@ -84,6 +83,13 @@ public class AccountmanagementController {
         }
         return "not authenticated";
 
+    }
+
+    @RequestMapping(value = "/account/getProfile")
+    public Profile getProfile(String jwttoken){
+        String c = Validator(jwttoken);
+            Profile p = profilerepository.findByEmail(c);
+            return p;
     }
 }
 

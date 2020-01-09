@@ -10,7 +10,7 @@ public class Profile implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "Email")
-    private String Email;
+    private String email;
     @Column(name = "Name")
     private String Name;
     @Column(name = "PhoneNo")
@@ -29,7 +29,7 @@ public class Profile implements Serializable{
     private Transaction transaction;
 
     public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode, Wallet wallet, Transaction transaction) {
-        Email = email;
+        this.email = email;
         Name = name;
         PhoneNo = phoneNo;
         NationalCode = nationalCode;
@@ -40,7 +40,7 @@ public class Profile implements Serializable{
     }
 
     public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode) {
-        Email = email;
+        email = email;
         Name = name;
         PhoneNo = phoneNo;
         NationalCode = nationalCode;
@@ -58,11 +58,11 @@ public class Profile implements Serializable{
     public void setId(int id) { this.id = id; }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        email = email;
     }
 
     public String getName() {
