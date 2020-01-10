@@ -1,6 +1,7 @@
 package cloud_microservice.Controller;
 import cloud_microservice.Model.Profile;
 import cloud_microservice.Model.ProfileRequest;
+import cloud_microservice.Model.Wallet;
 import cloud_microservice.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
@@ -49,25 +50,10 @@ public class AccountmanagementController {
 
     }
 
-    private String Validator(String jwttoken) {
-        final String uri = ".../authentiq/v1/validate/token";
-        System.out.println(jwttoken);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(jwttoken);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<ValidateMapper> entity = null;
-        entity = restTemplate.exchange(uri, HttpMethod.GET, entity, ValidateMapper.class);
-        HttpStatus statusCode = ((ResponseEntity<ValidateMapper>) entity).getStatusCode();
-        if (statusCode.value() == 200) {
-            return entity.getBody().getEmail();
-        }
-        return "fail";
-
-    }
 
     @RequestMapping(value = "/account/UpdateProfile",method = RequestMethod.POST)
     public String UpdateProfile(String jwttoken, @RequestBody ProfileRequest req){
-        String c = Validator(jwttoken);
+        String c = Validator.Validate(jwttoken);
         if (c != "fail") {
             Profile p = profilerepository.findByEmail(c);
             if ( p!= null) {
@@ -87,7 +73,7 @@ public class AccountmanagementController {
 
     @RequestMapping(value = "/account/getProfile")
     public Profile getProfile(String jwttoken){
-        String c = Validator(jwttoken);
+        String c = Validator.Validate(jwttoken);
             Profile p = profilerepository.findByEmail(c);
             return p;
     }
