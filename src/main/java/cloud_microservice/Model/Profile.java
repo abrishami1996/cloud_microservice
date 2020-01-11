@@ -28,7 +28,10 @@ public class Profile implements Serializable{
     @OneToOne(mappedBy = "profile",cascade = CascadeType.ALL)
     private Transaction transaction;
 
-    public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode, Wallet wallet, Transaction transaction) {
+    @OneToOne(mappedBy = "profile",cascade = CascadeType.ALL)
+    private ZarinPal zarinPal;
+
+    public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode, Wallet wallet, Transaction transaction, ZarinPal zarinPal) {
         this.email = email;
         Name = name;
         PhoneNo = phoneNo;
@@ -37,6 +40,7 @@ public class Profile implements Serializable{
         PostalCode = postalCode;
         this.wallet = wallet;
         this.transaction = transaction;
+        this.zarinPal = zarinPal;
     }
 
     public Profile(String email, String name, long phoneNo, long nationalCode, String address, long postalCode) {
@@ -119,5 +123,13 @@ public class Profile implements Serializable{
 
     public void setPostalCode(long postalCode) {
         PostalCode = postalCode;
+    }
+
+    public ZarinPal getZarinPal() {
+        return zarinPal;
+    }
+
+    public void setZarinPal(ZarinPal zarinPal) {
+        this.zarinPal = zarinPal;
     }
 }

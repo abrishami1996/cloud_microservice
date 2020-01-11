@@ -13,5 +13,6 @@ import java.util.List;
 public interface TransactionRepository extends JpaRepository<Transaction, Integer> {
 
   List<Transaction> findAllByProfile(Profile profile);
+  Transaction findByOrderID(int OrderID);
 
 }
