@@ -44,6 +44,13 @@ public class PaymentController {
         return transactionRepository.findAllByProfile(p);
     }
 
+    @RequestMapping(value = "/account/pay")
+    public List<Transaction> pay(String jwttoken){
+        String c = Validator.Validate(jwttoken);
+        Profile p = profilerepository.findByEmail(c);
+        return transactionRepository.findAllByProfile(p);
+    }
+
 
 }
 
